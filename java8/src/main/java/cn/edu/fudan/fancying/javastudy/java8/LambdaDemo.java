@@ -7,10 +7,12 @@ package cn.edu.fudan.fancying.javastudy.java8;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 
 public class LambdaDemo {
 
@@ -89,7 +91,8 @@ public class LambdaDemo {
     }
 
     //数组引用
-    @Test public void test7() {
+    @Test
+    public void test7() {
         Function<Integer, String[]> fun = (x) -> new String[x];
         String[] strs = fun.apply(8);
         System.out.println(strs.length);
@@ -98,5 +101,51 @@ public class LambdaDemo {
         String[] strArray = function.apply(6);
         System.out.println(strArray[0]);
         System.out.println(strArray.length);
+    }
+
+    //完美的 lambda 表达式只有一行
+    @Test
+    public void lambda(){
+
+        Integer values[] = {1,2,3,4};
+
+        //命令式风格
+        int result = 0;
+        for(int e : values) {
+            if(e > 3 && e % 2 == 0) {
+                result = e * 2;
+                break;
+            }
+        }
+
+        //函数式风格
+        int result1 = Arrays.stream(values)
+                .filter(e -> e > 3)
+                .filter(e -> e % 2 == 0)
+                .map(e -> e * 2)
+                .findFirst()
+                .orElse(0);
+
+    }
+
+    /**
+     * 使用lambda 作为粘合代码
+     *
+     * 使用方法引用进行调优
+     *
+     * e -> sumOfFactors(e)
+     * */
+    @Test
+    public void demo1(){
+        Integer values[] = {1,2,3,4,5,6,7};
+        System.out.println(
+                Arrays.stream(values)
+                        .mapToInt(LambdaDemo::sumOfFactors)
+                        .sum());
+    }
+    private static int sumOfFactors(int number) {
+        return IntStream.rangeClosed(1, number)
+                .filter(i -> number % i == 0)
+                .sum();
     }
 }
