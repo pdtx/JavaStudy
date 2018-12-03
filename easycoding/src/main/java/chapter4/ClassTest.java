@@ -23,7 +23,7 @@ public class ClassTest {
      *
      * 在类加载的时候，jvm会创建一个class对象
      *
-     * class对象是可以说是反射中最常用的，获取class对象的方式的主要有三种
+     * class对象是可以说是反射中最常用的，获取Class对象的方式的主要有三种
      *
      *     根据类名：类名.class
      *     根据对象：对象.getClass()
@@ -31,6 +31,7 @@ public class ClassTest {
      *
      * */
     public static void main(String[] args) throws Exception{
+        //Class a = Class.forName("chapter4.One");
 
         // 通过 newInstance 方法创建One 和 Another 的类对象
         // jdk9 中 newInstance 已经过时，使用getDeclaredConstructor().newInstance()的方式
@@ -42,6 +43,7 @@ public class ClassTest {
 
         Field privateFieldInOne = one.getDeclaredField("inner");
 
+        // 设置私有对象可以访问和修改
         privateFieldInOne.setAccessible(true);
 
         privateFieldInOne.set(oneObject,"changed");
