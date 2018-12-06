@@ -12,6 +12,7 @@
         <module>java8</module>
         <module>concurrent</module>
         <module>easycoding</module>
+        <module>algorithm</module>
     </modules>
 
     <name>javaStudy</name>
