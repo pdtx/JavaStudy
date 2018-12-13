@@ -7,6 +7,7 @@ package chapter6;
 
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TreeMapRepeat {
 
