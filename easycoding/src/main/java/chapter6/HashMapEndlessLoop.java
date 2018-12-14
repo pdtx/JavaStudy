@@ -26,6 +26,9 @@ public class HashMapEndlessLoop {
             }
         })).start();
 
+        (new Thread(() ->  map.put(System.nanoTime(), new EasyCoding()))).start();
+
+
     }
 
 }
