@@ -17,9 +17,9 @@ public class Counter {
         final Counter cas = new Counter();
         List<Thread> ts = new ArrayList<Thread>(600);
         Long start = System.currentTimeMillis();
-        for (int j = 0; j < 100; j++) {
+        for (int j = 0; j < 2; j++) {
             Thread t = new Thread(() -> {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < 2; i++) {
                     cas.count();
                     cas.safeCount();
                 }
@@ -54,6 +54,7 @@ public class Counter {
             int i = 0;
             boolean suc = atomicI.compareAndSet(i,++i);
             if (suc){
+                System.out.println("break");
                 break;
             }
         }
