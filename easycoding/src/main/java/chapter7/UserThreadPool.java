@@ -15,5 +15,7 @@ public class UserThreadPool {
         System.out.println(m);
         System.out.println(Integer.toBinaryString(m));
         System.out.println(Integer.toBinaryString(n));
+        // int 32 位 1 左移动 1000 的结果就是 1 左移 8 
+        System.out.println(1 << 8);
     }
 }
