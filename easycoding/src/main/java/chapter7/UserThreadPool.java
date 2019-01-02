@@ -8,6 +8,7 @@ package chapter7;
 public class UserThreadPool {
 
     public static void main(String[] args) {
+        /*
         int c = Integer.SIZE -3 ;
 
         int m = (1 << c)  ;
@@ -17,5 +18,6 @@ public class UserThreadPool {
         System.out.println(Integer.toBinaryString(n));
         // int 32 位 1 左移动 1000 的结果就是 1 左移 8
         System.out.println(1 << 8);
+        */
     }
 }
