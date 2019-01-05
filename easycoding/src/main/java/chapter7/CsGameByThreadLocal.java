@@ -35,4 +35,18 @@ public class CsGameByThreadLocal {
     });
     // lambda 表达式写法
     private static final ThreadLocal<Integer> LIFE_VALUE_THREADLOCAL =  ThreadLocal.withInitial( () -> KILLED_ENEMIES );
+
+    private static class Player extends Thread {
+
+        @Override
+        public void run() {
+            super.run();
+        }
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < TOTAL_PLAYERS; i++) {
+            new Player().start();
+        }
+    }
 }
