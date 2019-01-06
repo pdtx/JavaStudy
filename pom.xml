@@ -13,6 +13,7 @@
         <module>concurrent</module>
         <module>easycoding</module>
         <module>algorithm</module>
+        <module>design-pattern</module>
     </modules>
 
     <name>javaStudy</name>
