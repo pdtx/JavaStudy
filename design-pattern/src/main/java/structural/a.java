@@ -1,9 +1,9 @@
 /**
  * @description:
  * @author: fancying
- * @create: 2019-01-07 21:02
+ * @create: 2019-01-10 21:05
  **/
-package creational;
+package structural;
 
 public class a {
 }
