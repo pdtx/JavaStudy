@@ -6,6 +6,8 @@
 package structural.proxy;
 
 
+import net.sf.cglib.proxy.Enhancer;
+import structural.proxy.dynamic.HelloProxyCglib;
 import structural.proxy.dynamic.HelloProxyJDK;
 import structural.proxy.statical.HelloProxyStatic;
 
@@ -34,5 +36,11 @@ public class ProxyTest {
 
 
         //cglib 动态代理测试
+
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(Hello.class);
+        enhancer.setCallback(new HelloProxyCglib());
+        Hello hello1 = (Hello)enhancer.create();
+        hello1.sayHello();
     }
 }
