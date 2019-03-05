@@ -16,7 +16,7 @@ public class HelloProxyCglib implements MethodInterceptor {
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
 
         System.out.println("before cglib dynamic proxy ");
-        Object object = method.invoke(o,objects);
+        Object object = methodProxy.invokeSuper(o,objects);
         System.out.println("after cglib dynamic proxy");
         return object;
     }
