@@ -5,26 +5,60 @@
  **/
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class HeapSolution {
 
-    public int[][] kClosest(int[][] points, int K) {
 
+    /**
+     * 我们有一个由平面上的点组成的列表 points。需要从中找出 K 个距离原点 (0, 0) 最近的点。
+     *
+     * （这里，平面上两点之间的距离是欧几里德距离。）
+     *
+     * 你可以按任何顺序返回答案。除了点坐标的顺序之外，答案确保是唯一的。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：points = [[1,3],[-2,2]], K = 1
+     * 输出：[[-2,2]]
+     * 解释：
+     * (1, 3) 和原点之间的距离为 sqrt(10)，
+     * (-2, 2) 和原点之间的距离为 sqrt(8)，
+     * 由于 sqrt(8) < sqrt(10)，(-2, 2) 离原点更近。
+     * 我们只需要距离原点最近的 K = 1 个点，所以答案就是 [[-2,2]]。
+     *
+     * 注意：默认是小顶堆 大顶堆 需要重写 Comparator  queue.add() 以及 queue.poll()
+     * */
+    public int[][] kClosest(int[][] points, int K) {
+        PriorityQueue<int []> queue = new PriorityQueue<>((int [] o1, int [] o2) -> (distance(o2) - distance(o1)));
+        for (int [] point : points) {
+            queue.add(point);
+            if (queue.size() > K) {
+                queue.poll();
+            }
+        }
+        int [][] answer = new int[K][2];
+        int i = 0;
+        while (!queue.isEmpty()) {
+            answer[i++] = queue.poll();
+        }
+        return answer;
     }
 
+    private Integer distance(int [] point){
+        return point[0] * point[0] + point[1] * point[1] ;
+    }
+
+
+    // 以下的main函数供测试
     public static void main(String[] args) {
         int k = 3;
         int[] arr = {4,5,8,2} ;
         KthLargest kthLargest = new KthLargest(3, arr);
-        System.out.println(kthLargest.add(3) + " " + kthLargest.add(5) + "  "+ kthLargest.add(10));
-        ;   // returns 5
-        ;  // returns 5
-        kthLargest.add(9);   // returns 8
-        kthLargest.add(4);   // returns 8
+        System.out.println();
+
     }
 
 }
