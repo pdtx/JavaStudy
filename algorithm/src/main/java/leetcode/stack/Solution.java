@@ -23,7 +23,6 @@ public class Solution {
     public boolean backspaceCompare(String S, String T) {
         return sim(S).equals(sim(T));
     }
-
     private String simplify(String S) {
         // 注意 toCharArray
         char [] s = S.toCharArray();
@@ -46,7 +45,6 @@ public class Solution {
         }
         return ans.toString();
     }
-
     private String sim(String S) {
         Stack stack = new Stack();
         StringBuilder sr = new StringBuilder();
@@ -103,7 +101,6 @@ public class Solution {
         }
         return null;
     }
-
     public String decodeAtIndex(String S, int K) {
         long k = K;
         char s[] = S.toCharArray();

@@ -91,7 +91,6 @@ public class SortSolution {
             return "0";
         return sb;
     }
-
     private int compare(Integer a, Integer b) {
         if( a.equals(b))
             return 0;
@@ -116,6 +115,8 @@ public class SortSolution {
         }
         return 0;
     }
+
+    // Java中的数组排序，一般是利用Arrays.sort(),这个方法是经过优化的快速排序
 
     public static void main(String[] args) {
         SortSolution solution = new SortSolution();

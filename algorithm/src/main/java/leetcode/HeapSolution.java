@@ -46,7 +46,6 @@ public class HeapSolution {
         }
         return answer;
     }
-
     private Integer distance(int [] point){
         return point[0] * point[0] + point[1] * point[1] ;
     }
