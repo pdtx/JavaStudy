@@ -194,6 +194,45 @@ public class TreeSolution {
         }
     }
 
+
+    /**
+     * 给定一个二叉树，返回它的 后序 遍历
+     * */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null)
+            return list;
+        inOrder(root, list);
+        return list;
+    }
+    //递归算法
+    private void inOrder(TreeNode node, List<Integer> list) {
+        if (node == null)
+            return;
+        inOrder(node.left, list);
+        list.add(node.val);
+        inOrder(node.right, list);
+    }
+    //非递归算法
+    private void inOrderTree(TreeNode node, List<Integer> list) {
+        Stack<TreeNode> stack = new Stack<>();
+        List<TreeNode> nodeList = new ArrayList<>();
+        stack.push(node);
+        while (!stack.empty()) {
+            TreeNode treeNode = stack.peek();
+            if (treeNode.left != null && nodeList.contains(treeNode.left)) {
+                list.add(treeNode.val);
+                nodeList.add(treeNode);
+                stack.pop();
+                
+            }
+            if (treeNode.left != null) {
+                stack.push(treeNode.left);
+            }
+
+
+        }
+    }
     public static void main(String[] args) {
         TreeSolution treeSolution = new TreeSolution();
         TreeNode t1 = new TreeNode(1);

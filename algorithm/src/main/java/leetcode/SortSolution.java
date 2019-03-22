@@ -116,6 +116,61 @@ public class SortSolution {
         return 0;
     }
 
+    /**
+     * 给出一个无重叠的 ，按照区间起始端点排序的区间列表。
+     *
+     * 在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）。
+     *
+     * 示例 1:
+     *
+     * 输入: intervals = [[1,3],[6,9]], newInterval = [2,5]
+     * 输出: [[1,5],[6,9]]
+     *
+     * 重写 ： 思路一定要清晰 注意检查输入输出
+     * */
+    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+        List<Interval> ans = new ArrayList<>();
+        boolean isDone = false;
+        if (newInterval == null)
+            return intervals;
+        if (intervals.size() == 0) {
+            ans.add(newInterval);
+            return  ans;
+        }
+        int i = 0;
+        int newStart = newInterval.start;
+        int newEnd = newInterval.end;
+        while (i < intervals.size()) {
+            Interval interval = intervals.get(i);
+            if (isDone) {
+                ans.add(intervals.get(i++));
+                continue;
+            }
+            if (newStart > interval.end) {
+                ans.add(interval);
+                i++;
+                continue;
+            }
+            newStart = newStart < interval.start ? newStart : interval.start;
+            while (i < intervals.size() && newEnd >=  interval.end) {
+                i++;
+                if (i < intervals.size())
+                    interval = intervals.get(i);
+            }
+            if ( i < intervals.size() && newEnd >= interval.start) {
+                newEnd = interval.end;
+                i++;
+            }
+            ans.add(new Interval(newStart,newEnd));
+            isDone = true;
+        }
+        if (!isDone) {
+            ans.add(new Interval(newStart,newEnd));
+        }
+        return ans;
+    }
+
+
     // Java中的数组排序，一般是利用Arrays.sort(),这个方法是经过优化的快速排序
 
     public static void main(String[] args) {
@@ -123,4 +178,11 @@ public class SortSolution {
         int[] nums = {0,1,0};
         System.out.println(solution.largestNumber(nums));
     }
+}
+
+class Interval {
+    int start;
+    int end;
+    Interval() { start = 0; end = 0; }
+    Interval(int s, int e) { start = s; end = e; }
 }
