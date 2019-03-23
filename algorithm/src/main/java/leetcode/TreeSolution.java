@@ -149,6 +149,7 @@ public class TreeSolution {
         return list;
     }
 
+    
     /**
      * 给定一个二叉树，返回它的 后序 遍历
      * */
@@ -196,7 +197,7 @@ public class TreeSolution {
 
 
     /**
-     * 给定一个二叉树，返回它的 后序 遍历
+     * 给定一个二叉树，返回它的 中序 遍历
      * */
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
@@ -214,25 +215,49 @@ public class TreeSolution {
         inOrder(node.right, list);
     }
     //非递归算法
-    private void inOrderTree(TreeNode node, List<Integer> list) {
+    private void inOrderTree(TreeNode root, List<Integer> list) {
         Stack<TreeNode> stack = new Stack<>();
-        List<TreeNode> nodeList = new ArrayList<>();
-        stack.push(node);
-        while (!stack.empty()) {
-            TreeNode treeNode = stack.peek();
-            if (treeNode.left != null && nodeList.contains(treeNode.left)) {
-                list.add(treeNode.val);
-                nodeList.add(treeNode);
-                stack.pop();
-                
+        TreeNode node = root;
+        while (node != null || !stack.empty()) {
+            if (node != null) {
+                stack.push(node);
+                node = node.left;
+            } else {
+                node = stack.pop();
+                list.add(node.val);
+                node = node.right;
             }
-            if (treeNode.left != null) {
-                stack.push(treeNode.left);
-            }
-
-
         }
     }
+
+
+    /**
+     * 给定一个二叉树，返回它的 前序 遍历
+     * */
+    // 递归实现
+    private void preOrder(TreeNode node, List list) {
+        if (node == null)
+            return;
+        list.add(node.val);
+        preOrder(node.left,list);
+        preOrder(node.right,list);
+    }
+    //非递归实现
+    private void preOrderTree(TreeNode node, List list) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode n = node;
+        while (n != null || !stack.empty()) {
+            if( n != null) {
+                list.add(n.val);
+                stack.push(n);
+                n = n.left;
+            } else {
+                n = stack.pop();
+                n = n.right;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         TreeSolution treeSolution = new TreeSolution();
         TreeNode t1 = new TreeNode(1);
