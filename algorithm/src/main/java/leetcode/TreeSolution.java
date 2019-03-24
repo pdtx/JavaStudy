@@ -149,7 +149,7 @@ public class TreeSolution {
         return list;
     }
 
-    
+
     /**
      * 给定一个二叉树，返回它的 后序 遍历
      * */
@@ -257,6 +257,36 @@ public class TreeSolution {
             }
         }
     }
+
+
+    /**
+     * 给定一个二叉树，找出其最大深度。
+     *
+     * 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+     * */
+    public int maxDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        List<TreeNode> list = new ArrayList<>();
+        int depth = 1;
+        int len ;
+        list.add(root);
+        while (list.size() != 0) {
+            len = list.size();
+            depth++;
+            while (len > 0) {
+                TreeNode node = list.remove(len -1 );
+                if (node.left != null)
+                    list.add(node.left);
+                if (node.right != null)
+                    list.add(node.right);
+                len--;
+            }
+        }
+        return depth;
+        //return root == null ? 0 : Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
+    }
+
 
     public static void main(String[] args) {
         TreeSolution treeSolution = new TreeSolution();
