@@ -287,6 +287,81 @@ public class TreeSolution {
         //return root == null ? 0 : Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
     }
 
+    /**
+     *  二叉树的所有路径
+     *
+     * 思路： 典型的回溯遍历 当左右节点都为空的时候结束遍历 添加路径
+     * */
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> list = new ArrayList<>();
+        if (root != null)
+            preOrder(root, "", list);
+        return list;
+    }
+    private void preOrder(TreeNode node, String s, List list) {
+        if (node.left == null && node.right == null) {
+            list.add(s + node.val);
+            return;
+        }
+        if (node.left != null)
+            preOrder(node.left, s + node.val + "->", list);
+        if(node.right != null)
+            preOrder(node.right, s + node.val + "->",list);
+    }
+
+
+    /**
+     *给定一个大小为 n 的数组，找出其中所有出现超过 ⌊ n/3 ⌋ 次的元素。
+     *
+     * 说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1)。
+     *
+     * 示例 1:
+     *
+     * 输入: [3,2,3]
+     * 输出: [3]
+     *
+     * 思路：摩尔投票法。该算法用于1/2情况，它说：“在任何数组中，出现次数大于该数组长度一半的值只能有一个。”
+     *
+     * 那么，改进一下用于1/3。可以着么说：“在任何数组中，出现次数大于该数组长度1/3的值最多只有两个。”
+     * */
+    public List<Integer> majorityElement(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        if (nums.length == 0)
+            return list;
+        int ans1 = nums[0];
+        int ans2 = nums[0];
+        int count1 = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (count1 ==  0) {
+                ans1 = nums[i];
+                count1 = 2;
+            }  else
+                count1 = ans1 == nums[i] ? count1 + 2 : count1-1;
+        }
+        int count2=0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == ans1)
+                continue;
+            if (count1 == 0){
+                ans2 = nums[i];
+                count2 = 1;
+            } else
+                count2 = ans2 == nums[i] ? count2 + 1 : count2-1;
+        }
+        count2 = 0;
+        count1 = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] == ans1)
+                count1++;
+            if(nums[i] == ans2)
+                count2++;
+        }
+        if(count1 > nums.length/3)
+            list.add(ans1);
+        if(count2 > nums.length/3 && ans2 != ans1)
+            list.add(ans2);
+        return list;
+    }
 
     public static void main(String[] args) {
         TreeSolution treeSolution = new TreeSolution();
@@ -299,9 +374,10 @@ public class TreeSolution {
         t1.right = t3;
         t3.right = t4;
         t2.right = t5;
-        for (int i : treeSolution.postorderTraversal(t1)) {
-            System.out.println(i);
-        }
+
+        int nums [] = {1,2,2,3,2,1,1,3};
+        System.out.println(treeSolution.majorityElement(nums));
+
 
     }
 }
