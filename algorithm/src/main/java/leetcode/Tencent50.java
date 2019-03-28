@@ -5,6 +5,8 @@
  **/
 package leetcode;
 
+import java.util.Stack;
+
 public class Tencent50 {
 
 
@@ -106,7 +108,20 @@ public class Tencent50 {
 
 
     /**
+     *给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
      *
+     * 如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。
+     *
+     * 注意你不能在买入股票前卖出股票。
+     *
+     * 示例 1:
+     *
+     * 输入: [7,1,5,3,6,4]
+     * 输出: 5
+     * 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     *      注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。
+     *
+     *     思路： 找到当前价格的最小值
      * */
     public int maxProfit2(int[] prices) {
         int min = Integer.MAX_VALUE;
@@ -142,12 +157,85 @@ public class Tencent50 {
     public int climbStairs(int n) {
         if (n == 1)
             return 1;
-
-        return 0;
+        int a1 = 1;
+        int a2 = 1;
+        int sum = 0;
+        while (n > 1) {
+            sum = a1 + a2;
+            a1 = a2;
+            a2 = sum;
+            n--;
+        }
+        return sum;
     }
 
-    public static void main(String[] args) {
+    /**
+     * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+     *
+     * 有效字符串需满足：
+     *
+     *     左括号必须用相同类型的右括号闭合。
+     *     左括号必须以正确的顺序闭合。
+     *
+     * 注意空字符串可被认为是有效字符串。
+     *
+     * 示例 1:
+     *
+     * 输入: "()"
+     * 输出: true
+     * */
+    public boolean isValid(String s) {
+        char ch[] = s.toCharArray();
+        if(ch.length % 2 == 1)
+            return false;
+        Stack<Character> stack = new Stack<>();
+        for (char c : ch) {
+            if (stack.empty()) {
+                stack.push(c);
+            } else {
+                if(equal(stack.peek(),c))
+                    stack.pop();
+                else
+                    stack.push(c);
+            }
+        }
+        return stack.empty();
+    }
+    private boolean equal(char a, char b) {
+        if(a == '(' && b == ')')
+            return true;
+        if(a == '[' && b == ']')
+            return true;
+        if(a == '{' && b == '}')
+            return true;
+        return false;
+    }
 
+    /**
+     * 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+     * */
+    public int reverse(int x) {
+        if (x > -1 && x < 10)
+            return x;
+        boolean isNegative = x < 0 ;
+        if (isNegative)
+            x = -1 * x;
+        while (x % 10 == 0)
+            x /= 10;
+        StringBuilder sb = new StringBuilder(String.valueOf(x));
+        try {
+            x = Integer.valueOf((sb.reverse()).toString());
+        }catch (Exception e) {
+            return 0;
+        }
+        if (isNegative)
+            x *= -1;
+        return x;
+    }
+    public static void main(String[] args) {
+        int x = 1534236469;
+        Tencent50 tencent = new Tencent50();
+        System.out.println(tencent.reverse(x));
     }
 }
 
