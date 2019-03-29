@@ -232,6 +232,38 @@ public class Tencent50 {
             x *= -1;
         return x;
     }
+
+    /**
+     * 给定一个链表，判断链表中是否有环。
+     *
+     * 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+     *
+     *
+     *
+     * 示例 1：
+     *
+     * 输入：head = [3,2,0,-4], pos = 1
+     * 输出：true
+     * 解释：链表中有一个环，其尾部连接到第二个节点。
+     *
+     * 思路： 快慢指针
+     * */
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode quick = head;
+        while (quick != null) {
+            slow = slow.next;
+            quick = quick.next;
+            if (quick != null)
+                quick = quick.next;
+            else
+                return false;
+            if (slow == quick)
+                return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int x = 1534236469;
         Tencent50 tencent = new Tencent50();
