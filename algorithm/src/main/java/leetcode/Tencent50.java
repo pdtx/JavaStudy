@@ -264,10 +264,55 @@ public class Tencent50 {
         return false;
     }
 
+
+    /**
+     * 字符串数组的最长公共前缀
+     *
+     * 思路 :纵向扫描：从下标0开始，判断每一个字符串的下标0，判断是否全部相同。直到遇到不全部相同的下标。时间性能为O(n*m)
+     *      横向扫描：前两个字符串找公共子串，将其结果和第三个字符串找公共子串……直到最后一个串。时间性能为O(n*m)
+     * */
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0)
+            return "";
+        boolean isDone = false;
+        boolean isFirst = true;
+        int j = 0;
+        StringBuilder sb = new StringBuilder();
+        while (true) {
+            char ch = '0';
+            for (String s : strs) {
+                char [] str = s.toCharArray();
+                if (j < str.length) {
+                    if (isFirst) {
+                        ch = str[j];
+                        isFirst = false;
+                        continue;
+                    }
+                    if (ch != str[j]) {
+                        isDone = true;
+                        break;
+                    }
+                } else
+                    return sb.toString();
+            }
+            if (isDone)
+                break;
+            isFirst = true;
+            j++;
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+
+
+
+
+
     public static void main(String[] args) {
         int x = 1534236469;
         Tencent50 tencent = new Tencent50();
-        System.out.println(tencent.reverse(x));
+        String[] strs = {};
+        System.out.println(tencent.longestCommonPrefix(strs));
     }
 }
 
