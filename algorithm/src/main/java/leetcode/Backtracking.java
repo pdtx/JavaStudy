@@ -96,6 +96,7 @@ public class Backtracking {
                 temp.set(i, temp.get(begin));
                 temp.set(begin, val);
                 backTrackingFullPermutation(list, temp, begin - 1);
+                // 递归函数返回后，状态可以恢复到递归前，以此达到真正回溯
                 temp.set(begin, temp.get(i));
                 temp.set(i, val);
             }
@@ -103,15 +104,46 @@ public class Backtracking {
         }
     }
 
+
+    public List<String> letterCasePermutation(String S) {
+        List<String> list = new ArrayList<>();
+        if (S.length() == 0) {
+            list.add("");
+            return list;
+        }
+        char[] s = S.toCharArray();
+        List<Integer> index = new ArrayList<>();
+        for (int i = 0;i < s.length ; i++)
+            if (s[i] < '0' || s[i] > '9')
+                index.add(i);
+
+        if (index.size() == 0)
+            list.add(S);
+        else
+            backTracking(list, s, index, 0);
+        return list;
+    }
+    private void backTracking(List<String> list, char[] s, List<Integer> index, int begin) {
+        list.add(String.valueOf(s));
+        while (begin < index.size()) {
+            s[index.get(begin)] = charInverse(s[index.get(begin)]);
+            backTracking(list, s, index, begin + 1);
+            s[index.get(begin)] = charInverse(s[index.get(begin)]);
+            begin++;
+        }
+    }
+    private char charInverse(char ch) {
+        if (ch >= 'a' && ch <= 'z')
+            return Character.toUpperCase(ch);
+        return Character.toLowerCase(ch);
+    }
+
+
     public static void main(String[] args) {
-        int[] nums = {1,2,3};
         Backtracking backtracking = new Backtracking();
-        backtracking.permute(nums);
-        for (List<Integer> list : backtracking.permute(nums)) {
-            for (Integer integer : list) {
-                System.out.print(integer + " ");
-            }
-            System.out.println();
+        //backtracking.letterCasePermutation("a1b2");
+        for (String s : backtracking.letterCasePermutation("a3124b")) {
+            System.out.println(s);
         }
     }
 
