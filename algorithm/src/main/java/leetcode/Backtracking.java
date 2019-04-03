@@ -104,7 +104,9 @@ public class Backtracking {
         }
     }
 
-
+/**
+ * 字母数字大小全排列
+ * */
     public List<String> letterCasePermutation(String S) {
         List<String> list = new ArrayList<>();
         if (S.length() == 0) {
@@ -139,12 +141,65 @@ public class Backtracking {
     }
 
 
+    /**
+     * n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
+     *
+     * 给定一个整数 n，返回 n 皇后不同的解决方案的数量。
+     * */
+
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> ans = new ArrayList<>();
+        boolean[] isUsed = new boolean[n+1];
+        int[] p = new int[n+1];
+        for (int i = 0; i < n+1 ;i++) {
+            isUsed[i] = false;
+            p[i] = i;
+        }
+        generate(1, n, isUsed, p, ans);
+        return ans;
+    }
+    private void generate(int index, int n, boolean[] isUsed, int[] p, List<List<String>> ans) {
+        if(index == n + 1) {
+            List<String> list = new ArrayList<>();
+            for (int i = 1; i <= n; i++) {
+                StringBuilder sb = new StringBuilder();
+                for (int j = 1; j <= n; j++) {
+                    if(j != p[i])
+                        sb.append('.');
+                    else
+                        sb.append('Q');
+                }
+                list.add(sb.toString());
+            }
+            ans.add(list);
+            return;
+        }
+        for (int i = index; i <= n; i++) { // 第i列
+            if (!isUsed[i]) {  // 第i列还没有皇后
+                boolean flag = true; //flag为true表示当前皇后不会与之前的皇后冲突
+                for (int pre = 1; pre < index; pre++) { //遍历之前的皇后，查看是否会冲突
+                    if (Math.abs(index - pre) == Math.abs(i-p[pre])) { // 在同一个对角线上会冲突
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    p[index] = i;
+                    isUsed[i] = true;
+                    generate(1 + index, n, isUsed, p, ans);
+                    isUsed[i] = false;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Backtracking backtracking = new Backtracking();
         //backtracking.letterCasePermutation("a1b2");
-        for (String s : backtracking.letterCasePermutation("a3124b")) {
+/*        for (String s : backtracking.letterCasePermutation("a3124b")) {
             System.out.println(s);
-        }
+        }*/
+
     }
 
 }

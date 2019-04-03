@@ -135,6 +135,7 @@ public class Tencent50 {
         return max;
     }
 
+
     /**
      * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
      *
@@ -168,6 +169,7 @@ public class Tencent50 {
         }
         return sum;
     }
+
 
     /**
      * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
@@ -211,6 +213,7 @@ public class Tencent50 {
         return false;
     }
 
+
     /**
      * 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
      * */
@@ -233,6 +236,7 @@ public class Tencent50 {
         return x;
     }
 
+
     /**
      * 给定一个链表，判断链表中是否有环。
      *
@@ -254,12 +258,15 @@ public class Tencent50 {
         while (quick != null) {
             slow = slow.next;
             quick = quick.next;
-            if (quick != null)
+            if (quick != null) {
                 quick = quick.next;
-            else
+            } else {
                 return false;
-            if (slow == quick)
+            }
+
+            if (slow == quick) {
                 return true;
+            }
         }
         return false;
     }
@@ -305,14 +312,45 @@ public class Tencent50 {
     }
 
 
-
+    /**
+     * 给定长度为 n 的整数数组 nums，其中 n > 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
+     *
+     * 示例:
+     *
+     * 输入: [1,2,3,4]
+     * 输出: [24,12,8,6]
+     *
+     * 思路: 遍历两遍 第一遍left 记录所有数字i所有左边数字（包括i）的乘积
+     *      第二遍 记录右边数字的乘积 不包括i
+     * */
+    public int[] productExceptSelf(int[] nums) {
+        int[] left = new int[nums.length];
+        int sum = 1;
+        for (int i = 0; i < nums.length; i++) {
+            sum *= nums[i];
+            left[i] = sum;
+        }
+        sum = 1;
+        left[nums.length - 1] = left[nums.length - 2];
+        sum = nums[nums.length - 1];
+        for (int i = nums.length - 2; i > 0; i--) {
+            left[i] = left[i-1] * sum;
+            sum *= nums[i];
+        }
+        left[0] = sum;
+        return left;
+    }
 
 
     public static void main(String[] args) {
         int x = 1534236469;
         Tencent50 tencent = new Tencent50();
-        String[] strs = {};
-        System.out.println(tencent.longestCommonPrefix(strs));
+/*        String[] strs = {};
+        System.out.println(tencent.longestCommonPrefix(strs));*/
+
+        String s = "cn.edu.fudan";
+        System.out.println(s.replace('.','/'));
+
     }
 }
 
