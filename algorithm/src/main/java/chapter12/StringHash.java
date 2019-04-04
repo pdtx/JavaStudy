@@ -18,15 +18,14 @@ public class StringHash {
         return 0;
     }
 
+
+
     public static void main(String[] args) {
+        String dura = "2018.01.01-2018.12.12";
+        String start = dura.substring(0,10);
+        String end = dura.substring(11,21);
 
-        int same = 0;
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 1000; i++ ){
-            uuidToInt(UUID.randomUUID().toString());
-
-        }
-
+        System.out.println(start + " " + end);
     }
 
 }
