@@ -5,10 +5,52 @@
  **/
 package nowcoder;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+
+    public static double ans(int n, int w, int [] a) {
+        Arrays.sort(a);
+        double x = (double)w / 3 / n;
+        double min = a[1] <= (double)a[n+1]/2 ? a[1] : (double)a[n+1]/2;
+        if (min <= x)
+            return 3 * min * n;
+        else
+            return w;
+    }
+
+    private static void process(int num,int[] v,int[] step){
+        int p=num;
+        int tmp=0;
+        while(p<=100000){
+            v[p]++;
+            step[p]+=tmp++;
+            p*=2;
+        }
+        tmp=1;
+        while(num > 0){
+            if(num%2==1&&num!=1){
+                num/=2;
+                v[num]++;
+                step[num]+=tmp++;
+
+                int ff=num*2;
+                int ftemp=tmp;
+                while(ff<=100000){
+                    v[ff]++;
+                    step[ff]+=ftemp++;
+                    ff*=2;
+                }
+            }
+            else{
+                num/=2;
+                v[num]++;
+                step[num]+=tmp++;
+            }
+        }
+    }
 
     public static int count(int n, String str) {
         char[] num = str.toCharArray();
@@ -43,8 +85,23 @@ public class Main {
             }
         }
     }
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n + 1];
+        a[0] = Integer.MIN_VALUE;
+        for(int i = 1; i <= n; i++){
+            a[i] = sc.nextInt();
+        }
+        //DecimalFormat format   =   new   DecimalFormat("0.000000");
+        System.out.println();
+
+    }
+}
+
+/*        Scanner sc = new Scanner(System.in);
         int m = sc.nextInt();
         int n = sc.nextInt();
         int[] coins = new int[n + 1];
@@ -53,6 +110,4 @@ public class Main {
             coins[i] = sc.nextInt();
         }
         Main main = new Main();
-        System.out.println(main.count(m,n,coins));
-    }
-}
+        System.out.println(main.count(m,n,coins));*/
