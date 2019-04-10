@@ -65,6 +65,31 @@ public class Main {
         return Math.abs(num1 - num2);
     }
 
+    public static String ans(String s) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder appendStr = new StringBuilder();
+        StringBuilder num = new StringBuilder();
+        char [] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] >= '0' && chars[i] <= '9') {
+                num.append(chars[i]);
+            }else if (chars[i] == '(') {
+                i++;
+                while (chars[i] != ')')
+                    appendStr.append(chars[i++]);
+
+                for (int j = 1;j <= Integer.valueOf(num.toString()); j++)
+                    sb.append(appendStr);
+                appendStr.setLength(0);
+                num.setLength(0);
+            }else {
+                sb.append(chars[i]);
+            }
+        }
+
+        return sb.reverse().toString();
+    }
+
     public int count(int m, int n, int[] coins) {
         int ans = 0;
         int sum = 0;
@@ -88,15 +113,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+/*        Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] a = new int[n + 1];
         a[0] = Integer.MIN_VALUE;
         for(int i = 1; i <= n; i++){
             a[i] = sc.nextInt();
-        }
+        }*/
         //DecimalFormat format   =   new   DecimalFormat("0.000000");
-        System.out.println();
+        System.out.println(ans("abc3(A)"));
 
     }
 }
