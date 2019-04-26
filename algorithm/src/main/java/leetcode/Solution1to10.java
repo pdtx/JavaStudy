@@ -7,6 +7,7 @@ package leetcode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Solution1to10 {
 
@@ -61,6 +62,41 @@ public class Solution1to10 {
         }
     }
 
+    /**
+     * 循环优化
+     * */
+    public void cicle() {
+        final int MAX = 10000000;
+        int num = 0;
+        for (int j = 0 ;j<100;j++ ) {
+            System.out.println(j);
+            int[] a = new int[MAX];
+            Random random = new Random();
+            for (int i = 0; i < MAX; i++)
+                a[i] = random.nextInt() % 100;
+
+            int sum = 0;
+            long start = System.currentTimeMillis();
+            for (int i = 0; i < MAX; i++)
+                sum += a[i];
+            long end = System.currentTimeMillis();
+
+            System.out.println(end - start + "   " + sum);
+            long time1 = end - start;
+            sum = 0;
+            start = System.currentTimeMillis();
+            for (int i = 0; i < MAX - 1; i += 2) {
+                sum += a[i] + a[i + 1];
+            }
+
+            end = System.currentTimeMillis();
+            System.out.println(end - start + "   " + sum);
+            long time2 = end - start;
+            if (time1 <= time2)
+                num++;
+        }
+        System.out.println(num);
+    }
     public static void main(String[] args) {
         String s = "Let's take LeetCode contest";
         Solution1to10 solution = new Solution1to10();

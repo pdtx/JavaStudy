@@ -363,8 +363,10 @@ public class TreeSolution {
         return list;
     }
 
+
+
     public static void main(String[] args) {
-        TreeSolution treeSolution = new TreeSolution();
+/*        TreeSolution treeSolution = new TreeSolution();
         TreeNode t1 = new TreeNode(1);
         TreeNode t2 = new TreeNode(2);
         TreeNode t3 = new TreeNode(3);
@@ -376,8 +378,7 @@ public class TreeSolution {
         t2.right = t5;
 
         int nums [] = {1,2,2,3,2,1,1,3};
-        System.out.println(treeSolution.majorityElement(nums));
-
+        System.out.println(treeSolution.majorityElement(nums));*/
 
     }
 }
