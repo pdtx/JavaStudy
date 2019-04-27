@@ -111,6 +111,50 @@ public class Main {
         }
     }
 
+    /**
+     *  第一行包含空格分隔的两个数字N 和 D
+     *
+     *  第二行 包含N 个建筑物的位置，每一个位置用一个整数表示字节跳动大街看做一条数轴
+     *
+     *  输出一个数字表示不同方案的数量 。结果可能溢出，请对99997867取模
+     *
+     *  思路： 一个数组总任选三个数字， 最大的数字减去最小的数字 需要小于 d
+     *      二分搜索 以及累加求和
+     * */
+    public int answer(int n, int d, int [] num) {
+        if (n <= 2)
+            return 0;
+        if ( n == 3 && num[2] - num[0] <= d)
+            return 1;
+        int sum = 0;
+        for (int i = 0; i < n - 2; ++i) {
+            int end = n - 1;
+            int start = i + 1;
+            int mid = end;
+            if (num[end] - num[i] > d){
+                mid--;
+                while ( end > start) {
+                    if (num[mid] - num[i] <= d && num[mid + 1] - num[i] > d) {
+                        break;
+                    }
+                    mid = (start + end) / 2;
+                    if (num[mid] - num[i] > d) {
+                        end = mid ;
+                    } else {
+                        start = mid;
+                    }
+                }
+            }
+
+            sum += (mid - i) * (mid - i -1) / 2;
+            if (sum >= 99997867)
+                sum = sum % 99997867;
+        }
+
+        return sum;
+    }
+
+
     public static void main(String[] args) {
 
 /*        Scanner sc = new Scanner(System.in);
