@@ -89,10 +89,9 @@ public class LinkList {
      * 合并两个有序链表
      * */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null)
-            return l2;
-        ListNode pre = l1;
+        ListNode pre = new ListNode(Integer.MIN_VALUE);
         ListNode next = l1;
+        pre.next = l1;
         ListNode temp;
         while (l2 != null) {
             while (next != null) {
@@ -103,13 +102,12 @@ public class LinkList {
                         next = next.next;
                 }
             }
-            temp = l2;
-            l2 = l2.next;
-            temp.next = next;
-            pre.next = temp;
-            pre = temp;
+            temp = l2.next;
+            l2.next = next;
+            pre.next = l2;
+            pre = l2;
+            l2 = temp;
         }
-
         return l1;
     }
 }
