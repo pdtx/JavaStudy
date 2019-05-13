@@ -323,7 +323,7 @@ public class DynamicPrograming {
     /**
      * 完全背包问题
      * */
-    public static int packa() {
+    public static int completePackage(int w[], int c[], int V) {
         return 0;
     }
 

@@ -97,10 +97,27 @@ public class Solution1to10 {
         }
         System.out.println(num);
     }
+
+    /**
+     *
+     * */
+    public static boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j <= i + k && j < nums.length ; j++ ) {
+                // 考虑溢出
+                long res = (long)nums[i] - (long) nums[j];
+                if (Math.abs(res) <= t)
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
-        String s = "Let's take LeetCode contest";
+/*        String s = "Let's take LeetCode contest";
         Solution1to10 solution = new Solution1to10();
-        System.out.println(solution.reverseWords(s));
+        System.out.println(solution.reverseWords(s));};*/
+
     }
 
 }

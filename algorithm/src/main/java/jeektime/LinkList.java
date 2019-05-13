@@ -110,6 +110,18 @@ public class LinkList {
         }
         return l1;
     }
+
+    /**
+     * 合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。
+     *
+     * 建堆合并
+     * */
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode head = new ListNode(Integer.MIN_VALUE);
+        for (int i = 0; i < lists.length; i++)
+            head = mergeTwoLists(head, lists[i]);
+        return head.next;
+    }
 }
 
 
