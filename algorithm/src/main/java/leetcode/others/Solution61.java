@@ -48,11 +48,12 @@ import java.util.List;
  */
 public class Solution61 {
     public static void main(String[] args) {
-        ListNode n3 = new ListNode(2, null);
-        ListNode n2 = new ListNode(1, n3);
-        ListNode n1 = new ListNode(0, n2);
-
-        System.out.println(rotateRight(n1, 3));
+//        ListNode n3 = new ListNode(2, null);
+//        ListNode n2 = new ListNode(1, n3);
+//        ListNode n1 = new ListNode(0, n2);
+//
+//        System.out.println(rotateRight(n1, 3));
+        reverseBits(-3);
     }
 
     public static ListNode rotateRight(ListNode head, int k) {
@@ -83,5 +84,13 @@ public class Solution61 {
         head = it.next;
         it.next = null;
         return head;
+    }
+
+    public static int reverseBits(int n) {
+
+        String a = java.lang.Integer.toBinaryString(n);
+        System.out.println(Integer.parseInt(a));
+
+        return n;
     }
 }
