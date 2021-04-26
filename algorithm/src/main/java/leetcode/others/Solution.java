@@ -1,6 +1,8 @@
 package leetcode.others;
 
 
+import org.junit.Test;
+
 /**
  * description:
  *
@@ -13,5 +15,16 @@ public class Solution {
 
     }
 
+
+    @Test
+    public void testM(){
+        long start = System.currentTimeMillis();
+
+
+
+
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+    }
 
 }
