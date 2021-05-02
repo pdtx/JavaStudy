@@ -58,43 +58,33 @@ public class Solution368 {
      */
     public List<Integer> largestDivisibleSubset(int[] nums) {
         Arrays.sort(nums);
+
         List<Integer> res = Collections.singletonList(nums[0]);
-        int n = nums.length;
-        List<List<Integer>> tmp = new LinkedList<>();
-        int maxSize = 1;
+        List<List<Integer>> tmp = new ArrayList<>(nums.length);
 
-        boolean isFirstOne = nums[0] == 1;
-
+        int maxSize = 1,addMaxSize;
+        List<Integer> origin, newAdd ;
         for (int num : nums) {
-            // List<List<Integer>> midTmp = new LinkedList<>();
+            addMaxSize = 1;
+            newAdd = new ArrayList<>();
+            newAdd.add(num);
 
-            boolean isAdd = false;
             for (List<Integer> son : tmp) {
                 if (num % son.get(son.size() - 1) == 0) {
-
-                    son.add(num);
-                    if (maxSize < son.size()) {
-                        maxSize = son.size();
-                        res = son;
+                    origin = new ArrayList<>(son);
+                    origin.add(num);
+                    if (maxSize < origin.size()) {
+                        maxSize = origin.size();
+                        res = origin;
                     }
-                    isAdd = true;
+                    if (addMaxSize < origin.size()) {
+                        addMaxSize = origin.size();
+                        newAdd = origin;
+                    }
                 }
             }
-
-            if (!isAdd) {
-                List<Integer> list = new ArrayList<>(n);
-                list.add(num);
-                tmp.add(list);
-            }
-
-            if (isFirstOne) {
-                List<Integer> list = new ArrayList<>(n);
-                list.add(1);
-                tmp.add(list);
-            }
-
+            tmp.add(newAdd);
         }
-
 
         return res;
     }
