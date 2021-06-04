@@ -33,7 +33,7 @@
         <druidVersion>1.1.9</druidVersion>
         <fastjsonVersion>1.2.47</fastjsonVersion>
         <JDTVersion>3.12.3</JDTVersion>
-        <httpClientVersion>4.5.2</httpClientVersion>
+        <httpClientVersion>4.5.13</httpClientVersion>
     </properties>
 
     <dependencyManagement>
